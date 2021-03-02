@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Auto-render test</title>
+        <link rel="stylesheet" type="text/css" href="file:///android_asset/katex/katex.min.css">
+        <link rel="stylesheet" type="text/css" href="file:///android_asset/themes/style.css">
+        <script type="text/javascript" src="file:///android_asset/katex/katex.min.js"></script>
+        <script type="text/javascript" src="file:///android_asset/katex/contrib/auto-render.min.js"></script>
+        <style type="text/css">
+        @font-face {
+            font-family: Rubik_Medium;
+            src: url("http://fonts.gstatic.com/s/rubik/v3/D4HihERG27s-BJrQ4dvkbw.ttf")
+        }
+        body {
+            font-family: Rubik_Medium;
+        }
+        </style>
+    </head>
+    <body>
+        {$formula}
+        <script>
+          renderMathInElement(
+              document.body
+          );
+        </script>
+    </body>
+</html>

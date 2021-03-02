@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="file:///android_asset/themes/style.css">
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                messageStyle: 'none',
+                tex2jax: {preview: 'none'}
+            });
+        </script>
+        <script type="text/x-mathjax-config">
+            {$config}
+        </script>
+        <script type="text/javascript"
+            src="file:///android_asset/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <style type="text/css">
+        @font-face {
+            font-family: Rubik_Light;
+            src: url("http://fonts.gstatic.com/s/rubik/v3/o1vXYO8YwDpErHEAPAxpOg.ttf")
+        }
+        body {
+            font-family: Rubik_Light;
+        }
+        </style>
+    </head>
+    <body>
+        {$formula}
+    </body>
+</html>
