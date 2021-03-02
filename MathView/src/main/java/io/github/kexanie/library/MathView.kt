@@ -64,8 +64,8 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
         set(textArg) {
             field = textArg
             val chunkVal = chunk
-            chunk[TAG_FORMULA] = field
-            chunk[TAG_CONFIG] = mConfig
+            chunkVal[TAG_FORMULA] = field
+            chunkVal[TAG_CONFIG] = mConfig
             loadDataWithBaseURL(null, chunkVal.toString(), "text/html", "utf-8", "about:blank")
         }
 
