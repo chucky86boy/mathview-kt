@@ -63,10 +63,10 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
     var text: String? = ""
         set(textArg) {
             field = textArg
-            val chunk = chunk
+            val chunkVal = chunk
             chunk[TAG_FORMULA] = field
             chunk[TAG_CONFIG] = mConfig
-            loadDataWithBaseURL(null, chunk.toString(), "text/html", "utf-8", "about:blank")
+            loadDataWithBaseURL(null, chunkVal.toString(), "text/html", "utf-8", "about:blank")
         }
 
     // disable touch event on MathView
