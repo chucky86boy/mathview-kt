@@ -6,7 +6,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
+import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import android.webkit.WebView
 import com.x5.template.Chunk
@@ -14,43 +16,51 @@ import com.x5.template.Theme
 import com.x5.template.providers.AndroidTemplates
 import io.github.keaxanie.library.R
 
+class MathViewWebAppInterface(private val mContext: Context) {
+    /** Show a toast from the web page  */
+    @JavascriptInterface
+    fun showLog(logTxt: String) {
+        Log.d(null, logTxt)
+    }
+}
+
 class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Context, attrs: AttributeSet?) : WebView(context, attrs) {
     companion object {
         const val TAG_FORMULA = "formula"
-        const val TAG_CONFIG = "config"
 
         const val TEMPLATE_KATEX = "katex"
-        const val TEMPLATE_KATEX_LIGHT = "katex_light"
-        const val TEMPLATE_KATEX_MEDIUM = "katex_medium"
+        const val TEMPLATE_KATEX_LIGHT = "katexlight"
+        const val TEMPLATE_KATEX_MEDIUM = "katexmedium"
         const val TEMPLATE_MATHJAX = "mathjax"
-        const val TEMPLATE_MATHJAX_LIGHT = "mathjax_light"
-        const val TEMPLATE_MATHJAX_MEDIUM = "mathjax_medium"
-        const val DEFAULT_MATHJAX_CONFIG = "MathJax.Hub.Config({\n"+
-                "  CommonHTML: { linebreaks: { automatic: true } },\n"+
-                "  \"HTML-CSS\": { linebreaks: { automatic: true } },\n"+
-                "         SVG: { linebreaks: { automatic: true } }\n"+
-                "});"
+        const val TEMPLATE_MATHJAX_LIGHT = "mathjaxlight"
+        const val TEMPLATE_MATHJAX_MEDIUM = "mathjaxmedium"
 
         enum class FontFamily {
             Regular, Medium, Light
         }
     }
 
-    var mConfig: String? = null
+    var config: String? = null
+        set(configArg) {
+            if (engine == Engine.MATHJAX) {
+                field = configArg
+            }
+        }
 
     /**
      * Set the js engine used for rendering the formulas.
      *
      * This method should be call BEFORE setText().
      */
+    @Suppress("UNUSED_PARAMETER")
     var engine = 0
         set(engineArg) {
-            field = when (engineArg) {
+            val finalEngineArg = 1
+            field = when (finalEngineArg) {
                 Engine.KATEX -> {
                     Engine.KATEX
                 }
                 Engine.MATHJAX -> {
-                    config(DEFAULT_MATHJAX_CONFIG)
                     Engine.MATHJAX
                 }
                 else -> Engine.KATEX
@@ -65,7 +75,6 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
             field = textArg
             val chunkVal = chunk
             chunkVal[TAG_FORMULA] = field
-            chunkVal[TAG_CONFIG] = mConfig
             loadDataWithBaseURL(null, chunkVal.toString(), "text/html", "utf-8", "about:blank")
         }
 
@@ -106,26 +115,6 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
             return Theme(loader).makeChunk(template)
         }
 
-    /**
-     * Tweak the configuration of MathJax.
-     * The `config` string is a call statement for MathJax.Hub.Config().
-     * For example, to enable auto line breaking, you can call:
-     * config.("MathJax.Hub.Config({
-     * CommonHTML: { linebreaks: { automatic: true } },
-     * "HTML-CSS": { linebreaks: { automatic: true } },
-     * SVG: { linebreaks: { automatic: true } }
-     * });");
-     *
-     * This method should be call BEFORE setText() and AFTER setEngine().
-     * PLEASE PAY ATTENTION THAT THIS METHOD IS FOR MATHJAX ONLY.
-     * @param config
-     */
-    fun config(config: String?) {
-        if (engine == Engine.MATHJAX) {
-            mConfig = config
-        }
-    }
-
     object Engine {
         const val KATEX = 0
         const val MATHJAX = 1
@@ -152,5 +141,7 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
         } finally {
             mTypeArray.recycle()
         }
+
+        addJavascriptInterface(MathViewWebAppInterface(context), "Android")
     }
 }

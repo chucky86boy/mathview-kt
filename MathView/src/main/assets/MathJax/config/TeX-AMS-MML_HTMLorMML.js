@@ -13,8 +13,10 @@
  */
 
 MathJax.Hub.Config({
-    delayJaxRegistration: true
-});
+    messageStyle: 'none',
+    tex2jax: {preview: 'none'},
+    delayJaxRegistration: false
+})
 
 MathJax.Ajax.Preloading(
     "[MathJax]/jax/input/TeX/config.js",
@@ -95,22 +97,25 @@ MathJax.OutputJax["HTML-CSS"] = MathJax.OutputJax({
     webfontDir: MathJax.OutputJax.fontDir + "/HTML-CSS",
     config: {
         noReflows: true,
-        matchFontHeight: true,
+        matchFontHeight: false,
         scale: 100,
         minScaleAdjust: 50,
-        availableFonts: ["STIX", "TeX"],
-        preferredFont: "TeX",
-        webFont: "TeX",
-        imageFont: "TeX",
+        fonts: ["TeX"],
+        imageFont: null,
         undefinedFamily: "STIXGeneral,'Arial Unicode MS',serif",
         mtextFontInherit: false,
         EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50),
         EqnChunkFactor: 1.5,
         EqnChunkDelay: 100,
         linebreaks: {
-            automatic: true
+            automatic: true,
+            width: "container"
         },
         styles: {
+            ".MathJax": {
+                "font-size": "24px",
+                "line-height": "26px"
+            },
             ".MathJax_Display": {
                 "text-align": "center",
                 margin: "1em 0em"

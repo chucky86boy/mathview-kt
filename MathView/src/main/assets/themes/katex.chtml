@@ -10,7 +10,7 @@
         <style type="text/css">
         @font-face {
             font-family: Rubik;
-            src: url("http://fonts.gstatic.com/s/rubik/v3/4sMyW_teKWHB3K8Hm-Il6A.ttf")
+            src: url("file:///android_asset/fonts/Rubik-Regular.ttf")
         }
         body {
             font-family: Rubik;

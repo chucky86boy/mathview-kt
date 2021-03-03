@@ -8,7 +8,7 @@
         <style type="text/css">
         @font-face {
             font-family: Rubik;
-            src: url("file:///android_asset/fonts/Rubik-Regular.ttf")
+            src: url("file:///android_asset/fonts/Rubik-Light.ttf")
         }
         body {
             font-family: Rubik;
