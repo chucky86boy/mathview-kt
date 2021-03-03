@@ -2,7 +2,11 @@
   <dictionary name="chonghyukwon">
     <words>
       <w>katex</w>
+      <w>katexlight</w>
+      <w>katexmedium</w>
       <w>mathjax</w>
+      <w>mathjaxlight</w>
+      <w>mathjaxmedium</w>
     </words>
   </dictionary>
 </component>
