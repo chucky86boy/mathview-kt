@@ -55,8 +55,7 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
     @Suppress("UNUSED_PARAMETER")
     var engine = 0
         set(engineArg) {
-            val finalEngineArg = 1
-            field = when (finalEngineArg) {
+            field = when (engineArg) {
                 Engine.KATEX -> {
                     Engine.KATEX
                 }
