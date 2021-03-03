@@ -1,4 +1,4 @@
-@file:Suppress("MemberVisibilityCanBePrivate")
+@file:Suppress("MemberVisibilityCanBePrivate", "unused")
 
 package io.github.kexanie.library
 
@@ -16,7 +16,7 @@ import com.x5.template.Theme
 import com.x5.template.providers.AndroidTemplates
 import io.github.keaxanie.library.R
 
-class MathViewWebAppInterface(private val mContext: Context) {
+class MathViewWebAppInterface {
     /** Show a toast from the web page  */
     @JavascriptInterface
     fun showLog(logTxt: String) {
@@ -39,13 +39,6 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
             Regular, Medium, Light
         }
     }
-
-    var config: String? = null
-        set(configArg) {
-            if (engine == Engine.MATHJAX) {
-                field = configArg
-            }
-        }
 
     /**
      * Set the js engine used for rendering the formulas.
@@ -141,6 +134,6 @@ class MathView @SuppressLint("SetJavaScriptEnabled") constructor(context: Contex
             mTypeArray.recycle()
         }
 
-        addJavascriptInterface(MathViewWebAppInterface(context), "Android")
+        addJavascriptInterface(MathViewWebAppInterface(), "Android")
     }
 }

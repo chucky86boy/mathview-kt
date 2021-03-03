@@ -16,13 +16,13 @@
             font-family: Rubik;
         }
         </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                renderMathInElement(document.body);
+            });
+        </script>
     </head>
     <body>
         {$formula}
-        <script>
-          renderMathInElement(
-              document.body
-          );
-        </script>
     </body>
 </html>

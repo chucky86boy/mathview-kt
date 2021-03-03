@@ -6,3 +6,7 @@ body {
     color: #212121;
     line-height: 26px
 }
+
+.katex {
+    font-size: 18px
+}
